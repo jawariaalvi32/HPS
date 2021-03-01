@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['Registeration', 'Services', 'Welfare'];
+  return ['Registeration', 'Welfare', 'Services'];
 }
 
 function getStepContent(step) {
@@ -31,9 +31,9 @@ function getStepContent(step) {
     case 0:
       return <Register/>;
     case 1:
-      return <Services/>;
-    case 2:
       return <Welfare/>;
+    case 2:
+      return <Services/>;
     default:
       return 'Unknown step';
   }
