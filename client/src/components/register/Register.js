@@ -4,19 +4,12 @@ import {
   TextField,
   InputLabel,
   Grid,
-  DatePicker,
-  CssBaseline,
-  RadioGroup,
-  FormLabel,
   MenuItem,
   Select,
-  FormGroup,
   FormControl,
+  Checkbox,
   FormControlLabel,
-  InputText
 } from '@material-ui/core';
-import DateFnsUtils from '@date-io/date-fns';
-import { KeyboardDatePicker, MuiPickersUtilsProvider  } from '@material-ui/pickers';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -30,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Register() {
   const classes = useStyles();
+  const [options,setOptions] = useState([{val: false, opt: 'Welfare'}])
   const [Header, setHeader] = useState({
     MRNo: "",
     TokenNo: "",
@@ -65,89 +59,91 @@ export default function Register() {
     ModifyDate: ""
 });
 
+  const handleOption = (val) => {
+    console.log(val)
+    if (val == 'islam') {
+      setOptions([...options, 'zakaat', {val: true, opt: 'Zakaat'}])
+    }
+  }
+
   return (
-    <div style={{ padding: 16, margin: 'auto', maxWidth: '100%' }}>
-      <Grid container>
-        <Grid md={4} sm={12}>
-          <TextField value={Header.MRNo} id="MRNo"
+    <div style={{ padding: 16, margin: 'auto', maxWidth: '80%', justifyContent:'center' }}>
+      <Grid container spacing={2}>
+        <Grid item md={4} sm={12} lg={3}>
+          <TextField value={Header.MRNo} id="MRNo" fullWidth
             type="text" disabled={true}
             label="M.R. #"/>
         </Grid>
-        <Grid md={4} sm={12}>
-          <TextField value={Header.TokenNo} id="TokenNo" type="text" 
+        <Grid item md={4} sm={12} lg={3}>
+          <TextField value={Header.TokenNo} id="TokenNo" type="text" fullWidth
             onChange={(e) => setHeader({ ...Header, TokenNo: e.target.value })}
             label="TokenNo"/>
         </Grid>
-        <Grid md={4} sm={12}>
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker disableToolbar variant="inline" format="MM/dd/yyyy"
-              margin="normal" id="RegistrationDate" label="Registration Date"
-              value={Header.RegistrationDate}
-              onChange={(date) => setHeader({ ...Header, RegistrationDate: date })}
-            />
-          </MuiPickersUtilsProvider>
+        <Grid item md={4} sm={12} lg={3}>
+          <TextField id="RegistrationDate" label="Registration Date" type="date"
+            value={Header.RegistrationDate} fullWidth
+            onChange={(e) => setHeader({ ...Header, RegistrationDate: e.target.value })}
+            InputLabelProps={{
+              shrink: true,
+            }}/>
         </Grid>
-        <Grid md={4} sm={12}>
-          <TextField value={Header.Name} id="Name" type="text" 
+        <Grid item md={4} sm={12} lg={3}>
+          <TextField value={Header.Name} id="Name" type="text" fullWidth
             onChange={(e) => setHeader({ ...Header, Name: e.target.value })}
             label="Name"/>
         </Grid>
-        <Grid md={4} sm={12}>
-          <TextField value={Header.FatherOrHusband} id="FatherOrHusband" type="text" 
+        <Grid item md={4} sm={12} lg={3}>
+          <TextField value={Header.FatherOrHusband} id="FatherOrHusband" type="text" fullWidth
             onChange={(e) => setHeader({ ...Header, FatherOrHusband: e.target.value })}
             label="Father Name"/>
         </Grid>
-        <Grid md={4} sm={12}>
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker disableToolbar variant="inline" format="MM/dd/yyyy"
-              margin="normal" id="DOB" label="Date of Birth"
-              value={Header.DOB}
-              onChange={(date) => setHeader({ ...Header, DOB: date })}
-            />
-          </MuiPickersUtilsProvider>
+        <Grid item md={4} sm={12} lg={3}>
+          <TextField id="DOB" label="Date of Birth" type="date"
+            value={Header.DOB} fullWidth
+            onChange={(e) => setHeader({ ...Header, DOB: e.target.value })}
+            InputLabelProps={{
+              shrink: true,
+            }}/>
         </Grid>
-        <Grid md={4} sm={12}>
-          <TextField value={Header.Age} id="Age" type="number" 
+        <Grid item md={4} sm={12} lg={3}>
+          <TextField value={Header.Age} id="Age" type="number" fullWidth
             onChange={(e) => setHeader({ ...Header, Age: e.target.value })}
             label="Age"/>
         </Grid>
-        <Grid md={4} sm={12} lg={3}>
-          <FormControl>
-            <InputLabel id="demo-simple-select-helper-label">Gender</InputLabel>
-            <Select
+        <Grid item md={4} sm={12} lg={3}>
+          <FormControl fullWidth>
+            <InputLabel  id="demo-simple-select-helper-label">Gender</InputLabel>
+            <Select 
               labelId="demo-simple-select-helper-label"
               id="Gender"
               value={Header.Gender}
               onChange={(e) => setHeader({ ...Header, Gender: e.target.value })}
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
               <MenuItem value="male">Male</MenuItem>
               <MenuItem value="female">Female</MenuItem>
             </Select>
           </FormControl>
         </Grid>
-        <Grid md={4} sm={12} lg={3}>
-          <FormControl>
+        <Grid item md={4} sm={12} lg={3}>
+          <FormControl fullWidth>
             <InputLabel id="demo-simple-select-helper-label">Religion</InputLabel>
             <Select
               labelId="demo-simple-select-helper-label"
               id="Religion"
               value={Header.Religion}
-              onChange={(e) => setHeader({ ...Header, Religion: e.target.value })}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
+              onChange={ (e) => {
+                handleOption(e.target.value)
+                setHeader({ ...Header, Religion: e.target.value })
+              }
+              }>
               <MenuItem value="islam">Islam</MenuItem>
               <MenuItem value="christian">Christian</MenuItem>
               <MenuItem value="other">Other</MenuItem>
             </Select>
           </FormControl>
         </Grid>
-        <Grid md={4} sm={12}>
-          <FormControl className={classes.formControl}>
+        <Grid item md={4} sm={12} lg={3}>
+          <FormControl fullWidth>
             <InputLabel id="demo-simple-select-helper-label">IsZakat</InputLabel>
             <Select
               labelId="demo-simple-select-helper-label"
@@ -155,134 +151,126 @@ export default function Register() {
               value={Header.IsZakat}
               onChange={(e) => setHeader({ ...Header, IsZakat: e.target.value })}
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={true}>Yes</MenuItem>
-              <MenuItem value={false}>No</MenuItem>
+              {
+                options.map(( item ) => (
+                  <MenuItem value={item.val}>{item.opt}</MenuItem>
+                ))
+              }
             </Select>
           </FormControl>
         </Grid>
-        <Grid md={4} sm={12}>
-          <TextField value={Header.CNIC} id="CNIC" type="number" 
+        <Grid item md={4} sm={12} lg={3}>
+          <TextField value={Header.CNIC} id="CNIC" type="number" fullWidth
             onChange={(e) => setHeader({ ...Header, CNIC: e.target.value })}
             label="CNIC"/>
         </Grid>
       </Grid>
 
       <Grid container>
-          <Grid sm={12}>
-              {/* <Fieldset legend="Contact" style={{ padding: 10 }}> */}
-                  <Grid container>
-                    <Grid md={4} sm={12}>
-                      <TextField value={Header.HousNo} id="HousNo" type="text"
-                        Change={(e) => setHeader({ ...Header, HousNo: e.target.value })}
-                        label="HousNo"/>
-                    </Grid>
-                    <Grid md={4} sm={12}>
-                      <TextField value={Header.Address} id="Address" type="text"
-                        Change={(e) => setHeader({ ...Header, Address: e.target.value })}
-                        label="Address"/>
-                    </Grid>
-                    <Grid md={4} sm={12}>
-                      <TextField value={Header.Area} id="Area" type="text"
-                        Change={(e) => setHeader({ ...Header, Area: e.target.value })}
-                        label="Area"/>
-                    </Grid>
-                    <Grid md={4} sm={12}>
-                      <TextField value={Header.District} id="District" type="text"
-                        Change={(e) => setHeader({ ...Header, District: e.target.value })}
-                        label="District"/>
-                    </Grid>
-                    <Grid md={4} sm={12}>
-                      <TextField value={Header.City} id="City" type="text"
-                        Change={(e) => setHeader({ ...Header, City: e.target.value })}
-                        label="City"/>
-                    </Grid>
-                    <Grid md={4} sm={12}>
-                      <TextField value={Header.Phone} id="Phone" type="number"
-                        Change={(e) => setHeader({ ...Header, Phone: e.target.value })}
-                        label="Phone"/>
-                    </Grid>
-                    <Grid md={4} sm={12}>
-                      <TextField value={Header.OffPhone} id="OffPhone" type="number"
-                        Change={(e) => setHeader({ ...Header, OffPhone: e.target.value })}
-                        label="Office Phone"/>
-                    </Grid>
-                    <Grid md={4} sm={12}>
-                      <TextField value={Header.Mobile} id="Mobile" type="number"
-                        Change={(e) => setHeader({ ...Header, Mobile: e.target.value })}
-                        label="Mobile"/>
-                    </Grid>
-                    <Grid md={4} sm={12}>
-                      <TextField value={Header.MonthlyConsLimit} id="MonthlyConsLimit" type="number"
-                        Change={(e) => setHeader({ ...Header, MonthlyConsLimit: e.target.value })}
-                        label="Monthly Consumtion Limit"/>
-                    </Grid>  
-                  </Grid>
-              {/* </Fieldset> */}
+        <Grid sm={12}>
+          <Grid container spacing={2}>
+            <Grid item md={4} sm={12} lg={3}>
+              <TextField value={Header.HousNo} id="HousNo" type="text" fullWidth
+                onChange={(e) => setHeader({ ...Header, HousNo: e.target.value })}
+                label="HousNo"/>
+            </Grid>
+            <Grid item md={4} sm={12} lg={3}>
+              <TextField value={Header.Address} id="Address" type="text" fullWidth
+                onChange={(e) => setHeader({ ...Header, Address: e.target.value })}
+                label="Address"/>
+            </Grid>
+            <Grid item md={4} sm={12} lg={3}>
+              <TextField value={Header.Area} id="Area" type="text" fullWidth
+                onChange={(e) => setHeader({ ...Header, Area: e.target.value })}
+                label="Area"/>
+            </Grid>
+            <Grid item md={4} sm={12} lg={3}>
+              <TextField value={Header.District} id="District" type="text" fullWidth
+                onChange={(e) => setHeader({ ...Header, District: e.target.value })}
+                label="District"/>
+            </Grid>
+            <Grid item md={4} sm={12} lg={3}>
+              <TextField value={Header.City} id="City" type="text" fullWidth
+                onChange={(e) => setHeader({ ...Header, City: e.target.value })}
+                label="City"/>
+            </Grid>
+            <Grid item md={4} sm={12} lg={3}>
+              <TextField value={Header.Phone} id="Phone" type="number" fullWidth
+                onChange={(e) => setHeader({ ...Header, Phone: e.target.value })}
+                label="Phone"/>
+            </Grid>
+            <Grid item md={4} sm={12} lg={3}>
+              <TextField value={Header.OffPhone} id="OffPhone" type="number" fullWidth
+                onChange={(e) => setHeader({ ...Header, OffPhone: e.target.value })}
+                label="Office Phone"/>
+            </Grid>
+            <Grid item md={4} sm={12} lg={3}>
+              <TextField value={Header.Mobile} id="Mobile" type="number" fullWidth
+                onChange={(e) => setHeader({ ...Header, Mobile: e.target.value })}
+                label="Mobile"/>
+            </Grid>
+            <Grid item md={4} sm={12} lg={3}>
+              <TextField value={Header.MonthlyConsLimit} id="MonthlyConsLimit" type="number" fullWidth
+                onChange={(e) => setHeader({ ...Header, MonthlyConsLimit: e.target.value })}
+                label="Monthly Consumtion Limit"/>
+            </Grid>  
           </Grid>
+        </Grid>
       </Grid>
       <br />
       
       <Grid container>
-          <Grid sm={12}>
-              {/* <Fieldset legend="Reffer Info" style={{ padding: 10 }}> */}
-                  <Grid container>
-                      <Grid md={4} sm={12}>
-                        <TextField value={Header.RefBy} id="RefBy" type="text"
-                          Change={(e) => setHeader({ ...Header, RefBy: e.target.value })}
-                          label="Refered By"/>
-                      </Grid>
-                      <Grid md={4} sm={12}>
-                        <TextField value={Header.EmpID} id="EmpID" type="text"
-                          Change={(e) => setHeader({ ...Header, EmpID: e.target.value })}
-                          label="Employee ID"/>
-                      </Grid>
-                      <Grid md={4} sm={12}>
-                        <TextField value={Header.NOY} id="NOY" type="text"
-                          Change={(e) => setHeader({ ...Header, NOY: e.target.value })}
-                          label="NOY"/>
-                      </Grid>
-                      <Grid md={4} sm={12}>
-                        <TextField value={Header.Remarks} id="Remarks" type="text"
-                          Change={(e) => setHeader({ ...Header, Remarks: e.target.value })}
-                          label="Remarks"/>
-                      </Grid>
-                  </Grid>
-              {/* </Fieldset> */}
+        <Grid sm={12}>
+          <Grid container spacing={2}>
+              <Grid item md={4} sm={12} lg={3}>
+                <TextField value={Header.RefBy} id="RefBy" type="text" fullWidth
+                  onChange={(e) => setHeader({ ...Header, RefBy: e.target.value })}
+                  label="Refered By"/>
+              </Grid>
+              <Grid item md={4} sm={12}  lg={3}>
+                <TextField value={Header.EmpID} id="EmpID" type="text" fullWidth
+                  onChange={(e) => setHeader({ ...Header, EmpID: e.target.value })}
+                  label="Employee ID"/>
+              </Grid>
+              <Grid item md={4} sm={12}  lg={3}>
+                <TextField value={Header.NOY} id="NOY" type="text" fullWidth
+                  onChange={(e) => setHeader({ ...Header, NOY: e.target.value })}
+                  label="NOY"/>
+              </Grid>
+              <Grid item md={4} sm={12}  lg={6}>
+                <TextField value={Header.Remarks} id="Remarks" type="text" fullWidth
+                  onChange={(e) => setHeader({ ...Header, Remarks: e.target.value })}
+                  label="Remarks"/>
+              </Grid>
           </Grid>
+        </Grid>
       </Grid>
 
       <Grid container>
-          <Grid className="p-col-12">
-              {/* <Fieldset legend="Staff" style={{ padding: 10 }}> */}
-                  <Grid container>
-                    <Grid md={4} sm={12}>
-                      <TextField value={Header.RefBy} id="RefBy" type="text"
-                        Change={(e) => setHeader({ ...Header, RefBy: e.target.value })}
-                        label="Refered By"/>
-                    </Grid>
-                      {/* <Grid md={4} sm={12}>
-                          <div style={{ marginTop: 4 }}>
-                              <CheckboxButton label={"Is PAF Employee"} disabled={property.viewList} checked={Header.IsPAFEmp} style={{ fontSize: '20px' }}
-                                  Change={e => setHeader({ ...Header, IsPAFEmp: !Header.IsPAFEmp })} />
-                          </div>
-                      </div>
-                      <div className="p-col-2 p-lg-2 p-md-4 p-sm-12">
-                          <div style={{ marginTop: 4 }}>
-                              <CheckboxButton label={"Is Staff"} disabled={property.viewList} checked={Header.IsStaff} style={{ fontSize: '20px' }}
-                                  Change={e => setHeader({ ...Header, IsStaff: !Header.IsStaff })} />
-                          </div>
-                      </div>
-                      <div className="p-col-2 p-lg-2 p-md-4 p-sm-12">
-                          <div style={{ marginTop: 4 }}>
-                              <CheckboxButton label={"Is Rejected"} disabled={property.viewList} checked={Header.IsRejected} style={{ fontSize: '20px' }}
-                                  Change={e => setHeader({ ...Header, IsRejected: !Header.IsRejected })} />
-                          </div>
-                      </div> */}
-                  </Grid>
-              {/* </Fieldset> */}
+          <Grid col={12}>
+            <Grid container spacing={2} style={{marginTop:'3%'}}>
+              <Grid item md={4} sm={12}>
+                <FormControlLabel color="primary" fullWidth
+                control={<Checkbox checked={Header.IsPAFEmp} name="Is PAF Employee"
+                onChange={e => setHeader({ ...Header, IsPAFEmp: !Header.IsPAFEmp })} />}
+                label="Is PAF Employee"
+              />
+              </Grid>
+              <Grid item md={4} sm={12}>
+                <FormControlLabel color="primary" fullWidth
+                  control={<Checkbox checked={Header.IsStaff} name="Is Staff" 
+                  onChange={e => setHeader({ ...Header, IsStaff: !Header.IsStaff })} />}
+                  label="Is Staff"
+                />
+              </Grid>
+              <Grid item md={4} sm={12}>
+                <FormControlLabel color="primary"
+                  control={<Checkbox checked={Header.IsRejected} name="Is Rejected" fullWidth
+                  onChange={e => setHeader({ ...Header, IsRejected: !Header.IsRejected })} />}
+                  label="Is Rejected"
+                />
+              </Grid>                  
+            </Grid>
           </Grid>
       </Grid>
     </div>

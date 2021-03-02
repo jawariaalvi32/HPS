@@ -29,7 +29,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FormDialog(open, handleClose) {
+export default function FormDialog({open, handleClose}) {
   const classes = useStyles();
 
   return (
