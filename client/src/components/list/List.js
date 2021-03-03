@@ -1,7 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import MaterialTable from 'material-table'
-import { Dialog } from '@material-ui/core';
 import FormDialog from '../Dialog';
 import AddIcon from '@material-ui/icons/Add';
 const List = () => {
@@ -25,7 +23,7 @@ const List = () => {
     ])
     return (
         <div style={{ maxWidth: '90%', margin : 'auto' }}>
-            <FormDialog open={open} onClose={handleClose}/>
+            <FormDialog open={open} handleClose={handleClose}/>
             <MaterialTable
                 title = "Dummy Data"
                 columns = {columns}

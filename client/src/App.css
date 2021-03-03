@@ -29,6 +29,11 @@
 }
 .MuiAppBar-colorPrimary {
   color: black !important;
+  background-color: white !important;
+}
+.MuiTypography-h6 {
+  text-align: center !important;
+  
 }
 
 @keyframes App-logo-spin {

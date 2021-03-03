@@ -9,7 +9,9 @@ import {
   FormControl,
   Checkbox,
   FormControlLabel,
+  Button,
 } from '@material-ui/core';
+import GlobalHeader from '../GlobalHeader';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -21,9 +23,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Register() {
+export default function Register({next, back}) {
   const classes = useStyles();
   const [options,setOptions] = useState([{val: false, opt: 'Welfare'}])
+  const [err, setErr] = useState('')
   const [Header, setHeader] = useState({
     MRNo: "",
     TokenNo: "",
@@ -60,13 +63,34 @@ export default function Register() {
 });
 
   const handleOption = (val) => {
-    console.log(val)
     if (val == 'islam') {
       setOptions([...options, 'zakaat', {val: true, opt: 'Zakaat'}])
     }
   }
 
+  const validate = () => {
+    setErr('jjj')
+    // Object.keys(Header).map(function(key, index) {
+    //   console.log(Header[key])
+
+    //   if (Header[key] === "") {
+    //     console.log("IN")
+    //     setErr('hhh')
+    //     // return false;
+    //   }
+    // });
+  }
+
+  const handleSubmit = () => {
+    validate();
+    console.log(err)
+    console.log(Header);
+    next();
+  }
+
   return (
+    <div>
+    <GlobalHeader forward={handleSubmit} back={back} title="Registeration"/>
     <div style={{ padding: 16, margin: 'auto', maxWidth: '80%', justifyContent:'center' }}>
       <Grid container spacing={2}>
         <Grid item md={4} sm={12} lg={3}>
@@ -273,7 +297,10 @@ export default function Register() {
             </Grid>
           </Grid>
       </Grid>
+      <Button onClick={handleSubmit}>Save And Next</Button>
     </div>
+    </div>
+    
   );
 }
 

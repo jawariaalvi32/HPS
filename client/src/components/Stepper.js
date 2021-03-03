@@ -26,20 +26,20 @@ function getSteps() {
   return ['Registeration', 'Welfare', 'Services'];
 }
 
-function getStepContent(step) {
+function getStepContent(step, handleNext, handleBack) {
   switch (step) {
     case 0:
-      return <Register/>;
+      return <Register next={handleNext} back={handleBack}/>;
     case 1:
-      return <Welfare/>;
+      return <Welfare next={handleNext} back={handleBack}/>;
     case 2:
-      return <Services/>;
+      return <Services next={handleNext} back={handleBack}/>;
     default:
       return 'Unknown step';
   }
 }
 
-export default function HorizontalLinearStepper() {
+export default function HorizontalLinearStepper({handleClose}) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
@@ -55,6 +55,9 @@ export default function HorizontalLinearStepper() {
 
   const handleNext = () => {
     let newSkipped = skipped;
+    if(activeStep == 2) {
+      handleClose()
+    } 
     if (isStepSkipped(activeStep)) {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
@@ -65,7 +68,11 @@ export default function HorizontalLinearStepper() {
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    if(activeStep == 0) {
+      handleClose()
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    }
   };
 
   const handleSkip = () => {
@@ -118,7 +125,7 @@ export default function HorizontalLinearStepper() {
           </div>
         ) : (
           <div>
-            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+            <Typography className={classes.instructions}>{getStepContent(activeStep, handleNext, handleBack)}</Typography>
             <div>
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back
