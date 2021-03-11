@@ -11,6 +11,7 @@ import {
   FormControlLabel,
 } from '@material-ui/core';
 import GlobalHeader from '../GlobalHeader';
+import SubTable from './SubTable';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -252,6 +253,8 @@ export default function Welfare({next, back}) {
           </Grid>
         </Grid>
       </div>
+
+      <SubTable/>
     </div>
     
   );

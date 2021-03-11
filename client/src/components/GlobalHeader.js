@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function GlobalHeader({forward, back, title}) {
+export default function GlobalHeader({forward, back, title, btn}) {
   const classes = useStyles();
 
   return (
