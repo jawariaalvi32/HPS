@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   TextField,
@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core';
 import GlobalHeader from '../GlobalHeader';
 import Popup from '../Popup';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -163,13 +164,24 @@ export default function Register({next, back}) {
     else {
       return true;
     }
-}
+  }
+
+  useEffect(() => {
+    // axios.post('http://localhost:4000/api/register/add', data)
+    // .then(res => console.log(res))
+    // .catch(err => console.log(err, 'err'))
+  });
+
    const handleSubmit = () => {
     const val=validate();
     console.log(Header);
-    if ( val === true ) {
-      next()
-    }
+    // if ( val === true ) {
+      console.log("IN")
+      axios.post('http://localhost:4000/api/register/add', Header)
+      .then(res => console.log(res))
+      .catch(err => console.log(err, 'err'))
+      // next()
+    // }
   }
 
   return (
