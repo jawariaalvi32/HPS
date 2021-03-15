@@ -37,5 +37,5 @@ const serviceSchema = mongoose.Schema({
             required:[true, "Remarks is missing"] 
         }
 })
-const Register = mongoose.model('Service', serviceSchema)
-module.exports = Register
+const Service = mongoose.model('Service', serviceSchema)
+module.exports = Service

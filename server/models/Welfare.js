@@ -93,5 +93,5 @@ const welfareSchema = mongoose.Schema({
             required:[true, "ReqRelationWithPatient is missing"] 
         },
 })
-const Register = mongoose.model('Welfare', welfareSchema)
-module.exports = Register
+const Welfare = mongoose.model('Welfare', welfareSchema)
+module.exports = Welfare
