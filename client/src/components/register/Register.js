@@ -166,22 +166,16 @@ export default function Register({next, back}) {
     }
   }
 
-  useEffect(() => {
-    // axios.post('http://localhost:4000/api/register/add', data)
-    // .then(res => console.log(res))
-    // .catch(err => console.log(err, 'err'))
-  });
 
    const handleSubmit = () => {
     const val=validate();
     console.log(Header);
-    // if ( val === true ) {
+    if ( val === true ) {
       console.log("IN")
       axios.post('http://localhost:4000/api/register/add', Header)
       .then(res => next())
       .catch(err => console.log(err, 'err'))
-      // next()
-    // }
+    }
   }
 
   return (
