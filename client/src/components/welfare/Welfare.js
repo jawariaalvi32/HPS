@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import GlobalHeader from '../GlobalHeader';
 import SubTable from './SubTable';
+import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -53,10 +54,17 @@ export default function Welfare({next, back}) {
     ModifyUser: "Admin",
 });
 
-  const handleSubmit = () => {
-    console.log(Header);
-    next();
-  }
+const handleSubmit = () => {
+  // const val=validate();
+  console.log(Header);
+  // if ( val === true ) {
+    console.log("IN")
+    axios.post('http://localhost:4000/api/welfare/add', Header)
+    .then(res => next())
+    .catch(err => console.log(err, 'err'))
+    // next()
+  // }
+}
 
   return (
     <div>

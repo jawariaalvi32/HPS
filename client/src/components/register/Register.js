@@ -178,7 +178,7 @@ export default function Register({next, back}) {
     // if ( val === true ) {
       console.log("IN")
       axios.post('http://localhost:4000/api/register/add', Header)
-      .then(res => console.log(res))
+      .then(res => next())
       .catch(err => console.log(err, 'err'))
       // next()
     // }

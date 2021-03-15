@@ -11,7 +11,7 @@ import {
   FormControlLabel,
 } from '@material-ui/core';
 import GlobalHeader from '../GlobalHeader';
-
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -38,10 +38,17 @@ export default function Service({next, back}) {
     ModifyUser: "Admin"
 });
 
-  const handleSubmit = () => {
-    console.log(Header);
-    next();
-  }
+const handleSubmit = () => {
+  // const val=validate();
+  console.log(Header);
+  // if ( val === true ) {
+    console.log("IN")
+    axios.post('http://localhost:4000/api/service/add', Header)
+    .then(res => console.log(res))
+    .catch(err => console.log(err, 'err'))
+    // next()
+  // }
+}
   return (
     <div>
       <GlobalHeader forward={handleSubmit} back={back} title="Service"/>
