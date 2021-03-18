@@ -82,6 +82,8 @@ const handleSubmit = () => {
     axios.post('http://localhost:4000/api/service/add', Header)
     .then(res => console.log(res))
     .catch(err => console.log(err, 'err'))
+  } else {
+    setOpen(true)
   }
 }
   return (

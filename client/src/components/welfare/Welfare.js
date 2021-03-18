@@ -153,6 +153,8 @@ const handleSubmit = () => {
     axios.post('http://localhost:4000/api/welfare/add', Header)
     .then(res => next())
     .catch(err => console.log(err, 'err'))
+  } else {
+    setOpen(true)
   }
 }
 
