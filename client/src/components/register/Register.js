@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Register({next, back}) {
+export default function Register({next, back, id}) {
   const classes = useStyles();
   const [options,setOptions] = useState([])
   const [err, setErr] = useState('')
@@ -179,6 +179,16 @@ export default function Register({next, back}) {
       setOpen(true)
     }
   }
+
+  useEffect(() => {
+    console.log(id)
+
+    axios.get(`http://localhost:4000/api/register/${id}`)
+    .then( res => {
+      console.log(res)
+      // setHeader()
+    })
+  }, [])
 
   return (
     <div>
