@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const registerSchema = mongoose.Schema({
-    MRNo: "",
+        MRNo: {
+            type: String, 
+            required:[true, "MRNo is missing"] 
+        },
         TokenNo: {
             type: String, 
             required:[true, "TokenNo is missing"] 

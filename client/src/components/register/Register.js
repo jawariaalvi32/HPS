@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Register({next, back, id}) {
+export default function Register({next, back}) {
   const classes = useStyles();
   const [options,setOptions] = useState([])
   const [err, setErr] = useState('')
@@ -83,6 +83,10 @@ export default function Register({next, back, id}) {
     if (Header.TokenNo === '' || Header.TokenNo === undefined || Header.TokenNo === null) {
       setErr('Token is missing')
       setOpen(true)
+      return false;
+    }
+    else if (Header.MRNo === '' || Header.MRNo === undefined || Header.MRNo === null) {
+      setErr('MRNo is missing')
       return false;
     }
     else if (Header.RegistrationDate === '' || Header.RegistrationDate === undefined || Header.RegistrationDate === null) {
@@ -180,15 +184,15 @@ export default function Register({next, back, id}) {
     }
   }
 
-  useEffect(() => {
-    console.log(id)
+  // useEffect(() => {
+  //   console.log(id)
 
-    axios.get(`http://localhost:4000/api/register/${id}`)
-    .then( res => {
-      console.log(res)
-      // setHeader()
-    })
-  }, [])
+  //   axios.get(`http://localhost:4000/api/register/${id}`)
+  //   .then( res => {
+  //     console.log(res)
+  //     // setHeader()
+  //   })
+  // }, [])
 
   return (
     <div>
@@ -198,7 +202,7 @@ export default function Register({next, back, id}) {
       <Grid container spacing={2}>
         <Grid item md={4} sm={12} lg={3}>
           <TextField value={Header.MRNo} id="MRNo" fullWidth
-            type="text" disabled={true}
+            type="text"
             label="M.R. #"/>
         </Grid>
         <Grid item md={4} sm={12} lg={3}>

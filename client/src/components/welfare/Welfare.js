@@ -31,7 +31,7 @@ export default function Welfare({next, back}) {
   const [ err, setErr] = useState('')
 
   const [Header, setHeader] = useState({
-    MRNo: 'recID',
+    MRNo: '',
     TokenNo: "",
     WelfareDate: new Date(),
     Profession: "",
@@ -62,6 +62,10 @@ const validate = () => {
   if (Header.WelfareDate === '' || Header.WelfareDate === undefined || Header.WelfareDate === null) {
     setErr('WelfareDate is missing')
     setOpen(true)
+    return false;
+  }
+  else if (Header.MRNo === '' || Header.MRNo === undefined || Header.MRNo === null) {
+    setErr('MRNo is missing')
     return false;
   }
   else if (Header.Profession === '' || Header.Profession === undefined || Header.Profession === null) {
@@ -166,7 +170,7 @@ const handleSubmit = () => {
         <Grid container spacing={2}>
           <Grid item md={4} sm={12} lg={3}>
             <TextField value={Header.MRNo} id="MRNo" fullWidth
-              type="text" disabled={true}
+              type="text"
               label="M.R. #"/>
           </Grid>
           <Grid item md={4} sm={12} lg={3}>

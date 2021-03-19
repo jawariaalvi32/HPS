@@ -32,7 +32,7 @@ export default function Service({next, back}) {
   const [Header, setHeader] = useState({
     TokenNo: "",
     ServiceDate: new Date(),
-    MRNo: 'recID',
+    MRNo: '',
     Ward: "",
     Amount: "",
     TotalAmount: "",
@@ -46,6 +46,10 @@ const validate = () => {
   if (Header.ServiceDate === '' || Header.ServiceDate === undefined || Header.ServiceDate === null) {
     setErr('ServiceDate is missing')
     setOpen(true)
+    return false;
+  }
+  else if (Header.MRNo === '' || Header.MRNo === undefined || Header.MRNo === null) {
+    setErr('MRNo is missing')
     return false;
   }
   else if (Header.Ward === '' || Header.Ward === undefined || Header.Ward === null) {
@@ -99,7 +103,7 @@ const handleSubmit = () => {
                 <Grid container spacing={2}>
                   <Grid item md={4} sm={12} lg={3}>
                     <TextField value={Header.MRNo} id="MRNo" fullWidth
-                      type="text" disabled={true}
+                      type="text"
                       label="M.R. #"/>
                   </Grid>
                   <Grid item md={4} sm={12} lg={3}>
