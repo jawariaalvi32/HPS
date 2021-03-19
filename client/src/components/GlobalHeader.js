@@ -30,7 +30,7 @@ export default function GlobalHeader({forward, back, title, btn}) {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" color="primary">
         <Toolbar>
         <IconButton
               edge="end"

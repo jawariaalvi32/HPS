@@ -188,12 +188,12 @@ const handleSubmit = () => {
           </Grid>
           <Grid item md={4} sm={12} lg={3}>
             <FormControlLabel color="primary"
-              control={<Checkbox checked={Header.IsRejected} name="Is Rejected" fullWidth
+              control={<Checkbox checked={Header.IsRejected} name="Is Rejected" fullWidth color="primary"
               onChange={e => setHeader({ ...Header, IsRejected: !Header.IsRejected })} />}
               label="Zakaat"
             />
             <FormControlLabel color="primary"
-              control={<Checkbox checked={Header.IsRejected} name="Is Rejected" fullWidth
+              control={<Checkbox checked={Header.IsRejected} name="Is Rejected" fullWidth  color="primary"
               onChange={e => setHeader({ ...Header, IsRejected: !Header.IsRejected })} />}
               label="Donation"
             />
@@ -297,22 +297,22 @@ const handleSubmit = () => {
                   </Grid>
                   <Grid item sm={12} md={12} lg={12}>
                   <FormControlLabel color="primary"
-                    control={<Checkbox checked={Header.IsMarried} name="Is Maried" fullWidth
+                    control={<Checkbox checked={Header.IsMarried} name="Is Maried" fullWidth color="primary"
                     onChange={e => setHeader({ ...Header, IsMarried: !Header.IsMarried })} />}
                     label="Maried"
                   />
                   <FormControlLabel color="primary"
-                    control={<Checkbox checked={Header.HaveGold} name="HaveGold" fullWidth
+                    control={<Checkbox checked={Header.HaveGold} name="HaveGold" fullWidth color="primary"
                     onChange={e => setHeader({ ...Header, HaveGold: !Header.HaveGold })} />}
                     label="Have Gold"
                   />
                   <FormControlLabel color="primary"
-                    control={<Checkbox checked={Header.IsEarning} name="IsEarning" fullWidth
+                    control={<Checkbox checked={Header.IsEarning} name="IsEarning" fullWidth color="primary"
                     onChange={e => setHeader({ ...Header, IsEarning: !Header.IsEarning })} />}
                     label="Is Earning"
                   />
                   <FormControlLabel color="primary"
-                    control={<Checkbox checked={Header.IsAbleToPay} name="IsAbleToPay" fullWidth
+                    control={<Checkbox checked={Header.IsAbleToPay} name="IsAbleToPay" fullWidth color="primary"
                     onChange={e => setHeader({ ...Header, IsAbleToPay: !Header.IsAbleToPay })} />}
                     label="Is Able To Pay"
                   />

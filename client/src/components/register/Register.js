@@ -381,22 +381,22 @@ export default function Register({next, back}) {
           <Grid col={12}>
             <Grid container spacing={2} style={{marginTop:'3%'}}>
               <Grid item md={4} sm={12}>
-                <FormControlLabel color="primary" fullWidth
-                control={<Checkbox checked={Header.IsPAFEmp} name="Is PAF Employee"
+                <FormControlLabel color="secondary" fullWidth
+                control={<Checkbox checked={Header.IsPAFEmp} name="Is PAF Employee" color="primary"
                 onChange={e => setHeader({ ...Header, IsPAFEmp: !Header.IsPAFEmp })} />}
                 label="Is PAF Employee"
               />
               </Grid>
               <Grid item md={4} sm={12}>
                 <FormControlLabel color="primary" fullWidth
-                  control={<Checkbox checked={Header.IsStaff} name="Is Staff" 
+                  control={<Checkbox checked={Header.IsStaff} name="Is Staff" color="primary"
                   onChange={e => setHeader({ ...Header, IsStaff: !Header.IsStaff })} />}
                   label="Is Staff"
                 />
               </Grid>
               <Grid item md={4} sm={12}>
                 <FormControlLabel color="primary"
-                  control={<Checkbox checked={Header.IsRejected} name="Is Rejected" fullWidth
+                  control={<Checkbox checked={Header.IsRejected} name="Is Rejected" fullWidth color="primary"
                   onChange={e => setHeader({ ...Header, IsRejected: !Header.IsRejected })} />}
                   label="Is Rejected"
                 />
